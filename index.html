@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Opus Design — Web Design Studio</title>
+  <meta name="description" content="Opus Design crea Landing Page, Siti Web, Web App e Configuratori ad altissima conversione. Design mozzafiato, performance estreme."/>
+  <meta name="theme-color" content="#03060f"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <meta property="og:title" content="Opus Design — Web Design Studio"/>
+  <meta property="og:description" content="Esperienze digitali che dominano il mercato."/>
+  <meta property="og:type" content="website"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     LOADER
+══════════════════════════════════════ -->
+<div class="loader" id="loader">
+  <div class="loader-inner">
+    <svg class="loader-mono" viewBox="0 0 540 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#e8f0ff"/>
+          <stop offset="100%" stop-color="#a8c4ff"/>
+        </linearGradient>
+        <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#1D4ED8"/>
+          <stop offset="100%" stop-color="#38BDF8"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(80,10) scale(1.05)">
+        <path class="lp1" d="M 160 0 A 160 160 0 1 0 160 320 A 160 160 0 0 0 263 270 L 160 160 L 263 50 A 160 160 0 0 0 160 0 Z" fill="url(#lg1)"/>
+        <circle cx="160" cy="160" r="78" fill="#03060f"/>
+        <path class="lp2" d="M 200 0 L 340 0 A 160 160 0 0 1 340 320 L 200 320 L 200 218 L 270 218 A 58 58 0 0 0 270 102 L 200 102 Z" fill="url(#lg2)"/>
+      </g>
+    </svg>
+    <div class="loader-bar"><div class="loader-progress" id="loaderProgress"></div></div>
+    <div class="loader-text" id="loaderText">Caricamento...</div>
+  </div>
+</div>
+
+<!-- CUSTOM CURSOR -->
+<div class="cur-dot"  id="curDot"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<!-- CURSOR GLOW -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- ══════════════════════════════════════
+     BACKGROUND
+══════════════════════════════════════ -->
+<canvas id="bg-canvas"></canvas>
+<div class="aurora" aria-hidden="true">
+  <div class="aurora-band ab1"></div>
+  <div class="aurora-band ab2"></div>
+  <div class="aurora-band ab3"></div>
+</div>
+<div class="grid-layer"></div>
+<div class="scanline-overlay"></div>
+
+<!-- ══════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════ -->
+<header class="navbar" id="navbar">
+  <a href="#hero" class="nav-brand">
+    <img src="logo-dark.svg" alt="Opus Design" class="nav-logo" width="160"/>
+  </a>
+  <nav class="nav-links">
+    <a href="#services" class="nav-link">Servizi</a>
+    <a href="#about"    class="nav-link">Chi siamo</a>
+    <a href="#process"  class="nav-link">Processo</a>
+    <a href="#contact"  class="nav-cta" id="nav-cta-btn">
+      <span>Inizia ora</span>
+      <span class="cta-dot"></span>
+    </a>
+  </nav>
+  <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="#services" class="mob-link">Servizi</a>
+  <a href="#about"    class="mob-link">Chi siamo</a>
+  <a href="#process"  class="mob-link">Processo</a>
+  <a href="#contact"  class="mob-link mob-cta">Contattaci</a>
+</div>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<main id="main-content">
+<section class="hero" id="hero">
+
+  <!-- Decorative rings -->
+  <div class="hero-rings" aria-hidden="true">
+    <div class="hring hr1"></div>
+    <div class="hring hr2"></div>
+    <div class="hring hr3"></div>
+  </div>
+
+  <!-- Floating tech badges -->
+  <div class="tech-badges" aria-hidden="true">
+    <div class="tbadge tb1"><span class="tbadge-dot"></span>HTML / CSS</div>
+    <div class="tbadge tb2"><span class="tbadge-dot b2"></span>JavaScript</div>
+    <div class="tbadge tb3"><span class="tbadge-dot b3"></span>React / Next.js</div>
+    <div class="tbadge tb4"><span class="tbadge-dot b4"></span>Conversion Rate +↑</div>
+  </div>
+
+  <div class="hero-content">
+    <!-- Central logo with halo -->
+    <div class="hero-logo-wrap" id="heroLogoWrap">
+      <div class="logo-halo lh1"></div>
+      <div class="logo-halo lh2"></div>
+      <div class="logo-halo lh3"></div>
+      <img src="logo-dark.svg" alt="Opus Design" class="hero-logo" id="heroLogo" width="300"/>
+    </div>
+
+    <div class="hero-badge" id="heroBadge">
+      <span class="badge-pulse"></span>
+      <span class="badge-text">Disponibili per nuovi progetti</span>
+    </div>
+
+    <h1 class="hero-heading" id="heroHeading">
+      <span class="split-line sl1">
+        <span class="split-word">Diamo</span>
+        <span class="split-word">Forma</span>
+      </span>
+      <span class="split-line sl2">
+        <span class="split-word accent-w">all'Eccellenza</span>
+      </span>
+      <span class="split-line sl3">
+        <span class="split-word accent-w">Digitale</span>
+      </span>
+    </h1>
+
+    <!-- Typed subtitle -->
+    <p class="hero-typed">
+      Creiamo&nbsp;<span class="typed-target" id="typedTarget"></span><span class="typed-cursor">|</span>
+    </p>
+
+    <p class="hero-sub" id="heroSub">
+      Design mozzafiato, tecnologie di ultima generazione e una sola ossessione:
+      far crescere il tuo business <strong>in modo misurabile</strong>.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary" id="heroCta">
+        <span class="btn-label">Inizia il progetto</span>
+        <svg class="btn-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <span class="btn-shimmer"></span>
+        <span class="btn-ripple" id="btnRipple"></span>
+      </a>
+      <a href="#services" class="btn-ghost">
+        Esplora i servizi
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </div>
+
+    <!-- Live metrics strip -->
+    <div class="hero-metrics" id="heroMetrics">
+      <div class="metric">
+        <span class="metric-val" data-count="150">0</span><span class="metric-sfx">+</span>
+        <span class="metric-lbl">Progetti</span>
+      </div>
+      <div class="metric-sep"></div>
+      <div class="metric">
+        <span class="metric-val" data-count="98">0</span><span class="metric-sfx">%</span>
+        <span class="metric-lbl">Soddisfazione</span>
+      </div>
+      <div class="metric-sep"></div>
+      <div class="metric">
+        <span class="metric-val" data-count="10">0</span><span class="metric-sfx">+</span>
+        <span class="metric-lbl">Anni</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="scroll-cue" id="scrollCue" aria-hidden="true">
+    <span class="sc-label">scroll</span>
+    <div class="sc-line"></div>
+  </div>
+
+  <!-- Floating decor -->
+  <div class="float-decor" aria-hidden="true">
+    <div class="fd fd1"></div><div class="fd fd2"></div>
+    <div class="fd fd3"></div><div class="fd fd4"></div>
+    <div class="fd fd5"></div><div class="fd fd6"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TICKER
+══════════════════════════════════════ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-content" id="tickerA">
+      <span>Landing Page</span><em>✦</em>
+      <span>Siti Web</span><em>✦</em>
+      <span>Web App</span><em>✦</em>
+      <span>Configuratori</span><em>✦</em>
+      <span>E-Commerce</span><em>✦</em>
+      <span>UI/UX Design</span><em>✦</em>
+      <span>Landing Page</span><em>✦</em>
+      <span>Siti Web</span><em>✦</em>
+      <span>Web App</span><em>✦</em>
+      <span>Configuratori</span><em>✦</em>
+      <span>E-Commerce</span><em>✦</em>
+      <span>UI/UX Design</span><em>✦</em>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SERVICES
+══════════════════════════════════════ -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow reveal-up">I NOSTRI SERVIZI</span>
+      <h2 class="section-title reveal-up" data-delay="100">
+        Tutto ciò che serve per<br/>
+        <span class="text-grad scramble-text" data-text="dominare il digitale">dominare il digitale</span>
+      </h2>
+    </div>
+
+    <div class="services-grid">
+
+      <article class="svc-card" id="svc-1">
+        <div class="svc-neon-border"></div>
+        <div class="svc-card-inner">
+          <div class="svc-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <rect x="4" y="6" width="40" height="30" rx="4"/>
+              <path d="M14 42h20M24 36v6"/>
+              <path d="M11 16h10M11 21h6"/>
+              <rect x="25" y="13" width="12" height="11" rx="2"/>
+            </svg>
+          </div>
+          <div>
+            <span class="svc-num">01</span>
+            <h3 class="svc-title">Landing Page</h3>
+            <p class="svc-desc">Pagine ad altissima conversione che trasformano ogni visitatore in cliente. Copy persuasivo, design ipnotico, risultati misurabili.</p>
+          </div>
+        </div>
+        <div class="svc-tags">
+          <span>Conversion</span><span>A/B Test</span><span>Copy</span>
+        </div>
+      </article>
+
+      <article class="svc-card" id="svc-2">
+        <div class="svc-neon-border"></div>
+        <div class="svc-card-inner">
+          <div class="svc-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <rect x="4" y="4" width="40" height="32" rx="4"/>
+              <path d="M4 14h40"/><circle cx="10" cy="9" r="2" fill="currentColor" stroke="none"/>
+              <circle cx="16" cy="9" r="2" fill="currentColor" stroke="none"/>
+              <path d="M14 24l6 4-6 4M26 32h6M12 44h24M24 36v8"/>
+            </svg>
+          </div>
+          <div>
+            <span class="svc-num">02</span>
+            <h3 class="svc-title">Siti Web</h3>
+            <p class="svc-desc">Siti immersivi e su misura che raccontano il tuo brand. Veloci, responsive, SEO-ready e animati per impressionare al primo sguardo.</p>
+          </div>
+        </div>
+        <div class="svc-tags">
+          <span>SEO</span><span>Responsive</span><span>Performance</span>
+        </div>
+      </article>
+
+      <article class="svc-card" id="svc-3">
+        <div class="svc-neon-border"></div>
+        <div class="svc-card-inner">
+          <div class="svc-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <rect x="8" y="2" width="32" height="44" rx="5"/>
+              <path d="M20 6h8"/><circle cx="24" cy="40" r="2" fill="currentColor" stroke="none"/>
+              <path d="M16 18h4M16 24h10M16 30h6"/>
+              <circle cx="34" cy="22" r="7"/><path d="M34 19v3.5l2 2"/>
+            </svg>
+          </div>
+          <div>
+            <span class="svc-num">03</span>
+            <h3 class="svc-title">Web App</h3>
+            <p class="svc-desc">Applicazioni scalabili e performanti. Automatizziamo e digitalizziamo ogni processo del tuo business con tecnologie moderne.</p>
+          </div>
+        </div>
+        <div class="svc-tags">
+          <span>React</span><span>Next.js</span><span>API</span>
+        </div>
+      </article>
+
+      <article class="svc-card" id="svc-4">
+        <div class="svc-neon-border"></div>
+        <div class="svc-card-inner">
+          <div class="svc-icon-wrap">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <rect x="4" y="28" width="40" height="16" rx="3"/>
+              <path d="M10 36h4M18 36h4M26 36h4M34 36h4"/>
+              <rect x="8" y="4" width="14" height="14" rx="2"/>
+              <rect x="26" y="8" width="14" height="10" rx="2"/>
+              <path d="M15 20v8M33 20v8"/>
+            </svg>
+          </div>
+          <div>
+            <span class="svc-num">04</span>
+            <h3 class="svc-title">Configuratori</h3>
+            <p class="svc-desc">Strumenti interattivi su misura che guidano il cliente in un percorso d'acquisto unico, aumentando engagement e conversioni.</p>
+          </div>
+        </div>
+        <div class="svc-tags">
+          <span>Interactive</span><span>3D</span><span>Custom</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CODE WINDOW (About / Studio)
+══════════════════════════════════════ -->
+<section class="studio" id="about">
+  <div class="container">
+    <div class="studio-inner">
+
+      <!-- Left: Code Window -->
+      <div class="code-window reveal-left" id="codeWindow">
+        <div class="cw-bar">
+          <span class="cw-dot cd-r"></span>
+          <span class="cw-dot cd-y"></span>
+          <span class="cw-dot cd-g"></span>
+          <span class="cw-title">opusdesign.js</span>
+        </div>
+        <div class="cw-body">
+          <pre class="cw-code" id="codeBlock"></pre>
+        </div>
+        <div class="cw-glow"></div>
+      </div>
+
+      <!-- Right: Text -->
+      <div class="studio-text">
+        <span class="eyebrow reveal-up">IL NOSTRO STUDIO</span>
+        <h2 class="section-title reveal-up" data-delay="100">
+          Non facciamo siti web.<br/>
+          <span class="text-grad">Costruiamo macchine</span><br/>
+          di crescita.
+        </h2>
+        <p class="studio-body reveal-up" data-delay="200">
+          Siamo un team di designer e sviluppatori <strong>ossessionati dalla qualità</strong>. Ogni pixel, ogni animazione, ogni riga di codice viene pensata per un unico obiettivo: far crescere il tuo business.
+        </p>
+        <p class="studio-body reveal-up" data-delay="320">
+          Uniamo <strong>estetica premium</strong> e <strong>performance tecniche estreme</strong> in soluzioni che non solo catturano l'attenzione, ma la trasformano in risultati concreti e misurabili.
+        </p>
+
+        <div class="studio-stats reveal-up" data-delay="440">
+          <div class="ss-item">
+            <span class="ss-num" data-count="150">0</span><span class="ss-sfx">+</span>
+            <span class="ss-lbl">Progetti</span>
+          </div>
+          <div class="ss-div"></div>
+          <div class="ss-item">
+            <span class="ss-num" data-count="98">0</span><span class="ss-sfx">%</span>
+            <span class="ss-lbl">Soddisfazione</span>
+          </div>
+          <div class="ss-div"></div>
+          <div class="ss-item">
+            <span class="ss-num" data-count="10">0</span><span class="ss-sfx">+</span>
+            <span class="ss-lbl">Anni</span>
+          </div>
+        </div>
+
+        <div class="skill-bars reveal-up" data-delay="560">
+          <div class="skill-bar" data-pct="97">
+            <div class="sb-header"><span>UI / UX Design</span><span class="sb-pct">97%</span></div>
+            <div class="sb-track"><div class="sb-fill"></div></div>
+          </div>
+          <div class="skill-bar" data-pct="95">
+            <div class="sb-header"><span>Web Development</span><span class="sb-pct">95%</span></div>
+            <div class="sb-track"><div class="sb-fill"></div></div>
+          </div>
+          <div class="skill-bar" data-pct="90">
+            <div class="sb-header"><span>Performance & SEO</span><span class="sb-pct">90%</span></div>
+            <div class="sb-track"><div class="sb-fill"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PROCESS
+══════════════════════════════════════ -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow reveal-up">IL PROCESSO</span>
+      <h2 class="section-title reveal-up" data-delay="100">
+        Dal concept al <span class="text-grad">lancio</span>
+      </h2>
+    </div>
+
+    <div class="process-timeline">
+      <div class="pt-line"><div class="pt-progress" id="ptProgress"></div></div>
+
+      <div class="pt-step reveal-up" data-delay="0">
+        <div class="pts-dot"><span>01</span></div>
+        <div class="pts-card">
+          <h3>Discovery</h3>
+          <p>Ascoltiamo, analizziamo obiettivi, KPI e competitor del progetto.</p>
+          <span class="pts-tag">Strategia</span>
+        </div>
+      </div>
+
+      <div class="pt-step reveal-up" data-delay="150">
+        <div class="pts-dot"><span>02</span></div>
+        <div class="pts-card">
+          <h3>Design</h3>
+          <p>Prototipazione, UI/UX di alto livello e validazione iterativa.</p>
+          <span class="pts-tag">Creatività</span>
+        </div>
+      </div>
+
+      <div class="pt-step reveal-up" data-delay="300">
+        <div class="pts-dot"><span>03</span></div>
+        <div class="pts-card">
+          <h3>Sviluppo</h3>
+          <p>Codice pulito, performance ottimizzate e testing rigoroso.</p>
+          <span class="pts-tag">Tecnologia</span>
+        </div>
+      </div>
+
+      <div class="pt-step reveal-up" data-delay="450">
+        <div class="pts-dot"><span>04</span></div>
+        <div class="pts-card">
+          <h3>Lancio</h3>
+          <p>Deploy, monitoraggio, supporto e ottimizzazione continua.</p>
+          <span class="pts-tag">Crescita</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CTA
+══════════════════════════════════════ -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="cta-card reveal-up" id="ctaCard">
+      <!-- Animated mesh bg -->
+      <canvas class="cta-canvas" id="ctaCanvas"></canvas>
+
+      <!-- Rings -->
+      <div class="cta-ring cr1"></div>
+      <div class="cta-ring cr2"></div>
+      <div class="cta-ring cr3"></div>
+
+      <div class="cta-inner">
+        <div class="cta-mono-wrap" aria-hidden="true">
+          <svg class="cta-mono" viewBox="0 0 540 340" fill="none">
+            <defs>
+              <linearGradient id="cm1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#e8f0ff"/><stop offset="100%" stop-color="#a8c4ff"/>
+              </linearGradient>
+              <linearGradient id="cm2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1D4ED8"/><stop offset="100%" stop-color="#38BDF8"/>
+              </linearGradient>
+            </defs>
+            <g transform="scale(1.05)">
+              <path d="M 160 0 A 160 160 0 1 0 160 320 A 160 160 0 0 0 263 270 L 160 160 L 263 50 A 160 160 0 0 0 160 0 Z" fill="url(#cm1)"/>
+              <circle cx="160" cy="160" r="78" fill="#060c1a"/>
+              <path d="M 200 0 L 340 0 A 160 160 0 0 1 340 320 L 200 320 L 200 218 L 270 218 A 58 58 0 0 0 270 102 L 200 102 Z" fill="url(#cm2)"/>
+            </g>
+          </svg>
+        </div>
+
+        <span class="eyebrow">PRONTO A INIZIARE?</span>
+        <h2 class="cta-title">
+          Trasforma la tua visione<br/>
+          in <span class="text-grad">realtà digitale</span>
+        </h2>
+        <p class="cta-sub">Raccontaci il progetto. Risponderemo entro 24 ore.</p>
+
+        <div class="cta-email-block">
+          <span class="cta-pre">Scrivici a</span>
+          <a href="mailto:info@opusdesign.it" class="cta-email-link" id="ctaEmail">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+            info@opusdesign.it
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <img src="logo-dark.svg" alt="Opus Design" class="footer-logo" width="140" loading="lazy"/>
+      <p class="footer-tag">Web Design Studio — Since 2015</p>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Opus Design. Tutti i diritti riservati.</p>
+      <a href="mailto:info@opusdesign.it" class="footer-mail">info@opusdesign.it</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

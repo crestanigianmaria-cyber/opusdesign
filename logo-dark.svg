@@ -1,0 +1,52 @@
+<svg width="1000" height="900" viewBox="0 0 1000 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8f0ff"/>
+      <stop offset="100%" stop-color="#a8c4ff"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1D4ED8"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Monogram OD -->
+  <g transform="translate(280,260)">
+    <!-- O ring (light for dark bg) -->
+    <path d="
+      M 160 0
+      A 160 160 0 1 0 160 320
+      A 160 160 0 0 0 263 270
+      L 160 160
+      L 263 50
+      A 160 160 0 0 0 160 0
+      Z"
+      fill="url(#navyGrad)"/>
+    <!-- inner hole of O -->
+    <circle cx="160" cy="160" r="78" fill="#03060f"/>
+
+    <!-- D shape (blue gradient) -->
+    <path d="
+      M 200 0
+      L 340 0
+      A 160 160 0 0 1 340 320
+      L 200 320
+      L 200 218
+      L 270 218
+      A 58 58 0 0 0 270 102
+      L 200 102
+      Z"
+      fill="url(#blueGrad)"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g font-family="Helvetica, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <text x="500" y="760" font-size="86" letter-spacing="6">
+      <tspan fill="#f0f4ff">OPUS</tspan><tspan fill="#38BDF8">DESIGN</tspan>
+    </text>
+    <!-- subtitle with side lines -->
+    <line x1="200" y1="822" x2="330" y2="822" stroke="#7a8aaa" stroke-width="2"/>
+    <text x="500" y="830" font-size="26" font-weight="400" letter-spacing="8" fill="#7a8aaa">WEB DESIGN STUDIO</text>
+    <line x1="670" y1="822" x2="800" y2="822" stroke="#7a8aaa" stroke-width="2"/>
+  </g>
+</svg>
