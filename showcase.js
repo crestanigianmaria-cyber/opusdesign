@@ -124,6 +124,7 @@ export function initShowcase() {
   function autoScroll() {
     for (let i = 0; i < n; i++) {
       const st = auto[i];
+      const prev = st.pos;
       if (i === active && !reduceMotion) {
         if (st.hold > 0) st.hold--;
         else {
@@ -131,33 +132,40 @@ export function initShowcase() {
           if (st.pos >= st.dist) { st.pos = st.dist; st.dir = -1; st.hold = 110; }
           if (st.pos <= 0) { st.pos = 0; st.dir = 1; st.hold = 120; }
         }
-      } else {
-        st.pos += (0 - st.pos) * 0.08;
+      } else if (st.pos > 0.2) {
+        st.pos += (0 - st.pos) * 0.1;
         st.dir = 1; st.hold = 60;
+      } else if (st.pos !== 0) {
+        st.pos = 0; st.dir = 1; st.hold = 60;
       }
-      roots[i].style.transform = `translate3d(0,${(-st.pos).toFixed(1)}px,0)`;
+      if (Math.abs(st.pos - prev) > 0.05) {
+        roots[i].style.transform = `translate3d(0,${(-st.pos).toFixed(1)}px,0)`;
+      }
     }
   }
 
   // Loop attivo solo quando la sezione è visibile
-  let visible = false, rafId = 0;
+  let visible = false, rafId = 0, needsRender = true;
   function loop() {
-    current += (target - current) * 0.085;
-    if (Math.abs(target - current) < 0.0005) current = target;
-    mx += (tmx - mx) * 0.08;
-    my += (tmy - my) * 0.08;
-    render();
+    const dc = target - current, dmx = tmx - mx, dmy = tmy - my;
+    if (Math.abs(dc) > 0.0005 || Math.abs(dmx) > 0.0005 || Math.abs(dmy) > 0.0005 || needsRender) {
+      current += Math.abs(dc) < 0.0005 ? dc : dc * 0.085;
+      mx += Math.abs(dmx) < 0.0005 ? dmx : dmx * 0.08;
+      my += Math.abs(dmy) < 0.0005 ? dmy : dmy * 0.08;
+      render();
+      needsRender = false;
+    }
     autoScroll();
     if (visible) rafId = requestAnimationFrame(loop);
   }
   new IntersectionObserver(([e]) => {
     visible = e.isIntersecting;
     cancelAnimationFrame(rafId);
-    if (visible) rafId = requestAnimationFrame(loop);
+    if (visible) { needsRender = true; rafId = requestAnimationFrame(loop); }
   }, { rootMargin: '100px' }).observe(section);
 
   window.addEventListener('scroll', () => { target = progress() * (n - 1); }, { passive: true });
-  window.addEventListener('resize', () => { measure(); target = progress() * (n - 1); });
+  window.addEventListener('resize', () => { measure(); target = progress() * (n - 1); needsRender = true; });
 
   stage.addEventListener('mousemove', (e) => {
     const r = stage.getBoundingClientRect();

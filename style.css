@@ -936,11 +936,11 @@ button{border:none;background:none;cursor:none;font-family:inherit;}
   will-change:transform,opacity;
 }
 .dc-glow{
-  position:absolute;inset:-24px;border-radius:30px;pointer-events:none;
-  background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--accent) 45%,transparent),transparent 70%);
-  opacity:calc(var(--focus,0) * 0.75);
-  filter:blur(26px);transition:opacity 0.3s;
+  position:absolute;inset:-32px;border-radius:36px;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 50%,color-mix(in srgb,var(--accent) 42%,transparent),transparent 68%);
+  opacity:0;transition:opacity 0.4s;
 }
+.demo-card.is-active .dc-glow{opacity:0.75;}
 .dc-frame{
   position:relative;width:100%;
   border-radius:16px;overflow:hidden;
@@ -948,6 +948,7 @@ button{border:none;background:none;cursor:none;font-family:inherit;}
   border:1px solid rgba(255,255,255,0.12);
   box-shadow:0 35px 90px rgba(0,0,0,0.65),0 0 0 1px rgba(255,255,255,0.04) inset;
   transition:border-color 0.35s,box-shadow 0.35s;
+  transform:translateZ(0);
 }
 .demo-card.is-active .dc-frame{
   border-color:color-mix(in srgb,var(--accent) 60%,rgba(255,255,255,0.2));
@@ -980,11 +981,18 @@ button{border:none;background:none;cursor:none;font-family:inherit;}
 .dc-screen{
   position:relative;width:100%;aspect-ratio:16 / 10;overflow:hidden;
   background:#050811;pointer-events:none;
+  contain:layout style paint;
 }
 .dc-scale{
   width:1280px;height:800px;
   transform:scale(var(--s));transform-origin:top left;
 }
+.dc-scale .demo-root{will-change:transform;}
+.demo-card:not(.is-active) .demo,
+.demo-card:not(.is-active) .demo *{
+  animation-play-state:paused !important;
+}
+.demo-card:not(.is-active) .ki-chip{backdrop-filter:none;}
 .dc-shade{
   position:absolute;inset:0;pointer-events:none;
   background:rgba(3,6,15,var(--shade,0));

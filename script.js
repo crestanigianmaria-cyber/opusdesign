@@ -516,7 +516,7 @@ function initCtaForm() {
       feedback.classList.remove('err');
       const subject = encodeURIComponent(`[Opus Design] Richiesta ${selectedType} — ${name}`);
       const body = encodeURIComponent(`Nome: ${name}\nEmail: ${email}\nProgetto: ${selectedType}\n\nDettagli:\n${msg || '—'}`);
-      window.location.href = `mailto:info@opusdesign.it?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:opusdstudio@gmail.com?subject=${subject}&body=${body}`;
       feedback.textContent = `Perfetto ${name}! Abbiamo preparato la tua richiesta per "${selectedType}".`;
       form.reset();
     });
@@ -526,7 +526,7 @@ function initCtaForm() {
   if (copyBtn) {
     copyBtn.addEventListener('click', async () => {
       try {
-        await navigator.clipboard.writeText('info@opusdesign.it');
+        await navigator.clipboard.writeText('opusdstudio@gmail.com');
       } catch (_) {
         // Fallback silenzioso
       }
