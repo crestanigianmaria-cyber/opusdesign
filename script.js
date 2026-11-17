@@ -1,6 +1,7 @@
 /* ═══════════════════════════════════════════════════════
    OPUS DESIGN — script.js  v4  (Awwwards level)
 ═══════════════════════════════════════════════════════ */
+import { initShowcase } from './showcase.js';
 
 // ─── 1. LOADER ─────────────────────────────────────────
 function initLoader() {
@@ -76,7 +77,7 @@ function initCursor() {
   requestAnimationFrame(renderRing);
 
   // Hover states
-  document.querySelectorAll('a, button, .svc-card').forEach(el => {
+  document.querySelectorAll('a, button, .svc-card, .demo-card').forEach(el => {
     el.addEventListener('mouseenter', () => {
       if(curRing) curRing.classList.add('hovered');
       if(curDot) curDot.classList.add('hovered');
@@ -474,6 +475,71 @@ function initSmoothScroll() {
   });
 }
 
+// ─── 13. SCROLL PROGRESS BAR ───────────────────────────
+function initScrollProgress() {
+  const bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+  const update = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    bar.style.width = pct.toFixed(2) + '%';
+  };
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+}
+
+// ─── 14. CTA QUICK QUOTE FORM & COPY EMAIL ─────────────
+function initCtaForm() {
+  const form = document.getElementById('ctaForm');
+  const feedback = document.getElementById('cfFeedback');
+  if (form) {
+    let selectedType = 'Sito Web';
+    form.querySelectorAll('.cf-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        form.querySelectorAll('.cf-pill').forEach(p => p.classList.remove('on'));
+        pill.classList.add('on');
+        selectedType = pill.dataset.val;
+      });
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name  = document.getElementById('cfName').value.trim();
+      const email = document.getElementById('cfEmail').value.trim();
+      const msg   = document.getElementById('cfMsg').value.trim();
+
+      if (!name || !email || !email.includes('@')) {
+        feedback.classList.add('err');
+        feedback.textContent = 'Inserisci nome e un indirizzo email valido.';
+        return;
+      }
+      feedback.classList.remove('err');
+      const subject = encodeURIComponent(`[Opus Design] Richiesta ${selectedType} — ${name}`);
+      const body = encodeURIComponent(`Nome: ${name}\nEmail: ${email}\nProgetto: ${selectedType}\n\nDettagli:\n${msg || '—'}`);
+      window.location.href = `mailto:info@opusdesign.it?subject=${subject}&body=${body}`;
+      feedback.textContent = `Perfetto ${name}! Abbiamo preparato la tua richiesta per "${selectedType}".`;
+      form.reset();
+    });
+  }
+
+  const copyBtn = document.getElementById('copyEmailBtn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('info@opusdesign.it');
+      } catch (_) {
+        // Fallback silenzioso
+      }
+      copyBtn.classList.add('copied');
+      copyBtn.querySelector('span').textContent = 'Copiata!';
+      setTimeout(() => {
+        copyBtn.classList.remove('copied');
+        copyBtn.querySelector('span').textContent = 'Copia';
+      }, 2000);
+    });
+  }
+}
+
 // ─── BOOT ANIMATIONS (Called after loader) ─────────────
 function bootAnimations() {
   document.querySelectorAll('.split-word').forEach((w, i) => {
@@ -492,6 +558,9 @@ function bootAnimations() {
 
 // ─── INIT ──────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
+  initShowcase();
+  initScrollProgress();
+  initCtaForm();
   initLoader();
   initCursor();
   resizeBg();
